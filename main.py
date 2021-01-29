@@ -10,9 +10,19 @@ client.remove_command("help")
 @client.event
 async def on_ready():
     print(f'XEA has launched at {datetime.now()}')
-    amount_servers = len(client.servers)
+    amount_servers = len(client.guilds)
     activity = discord.Game(name=f"?help | {amount_servers} servers", type=3)
     await client.change_presence(status=discord.Status.online, activity=activity)    
+
+@client.command()
+async def stats(ctx):
+    embed = discord.Embed(
+        title="SlimBot Statistics",
+        colour=0xe86823
+    )
+    servers_amount = len(client.guilds)
+    embed.add_field(name="Servers: ", value=f"`{servers_amount} servers`")
+    await ctx.send(embed=embed)
 
 @client.group(invoke_without_command=True)
 async def help(ctx):
