@@ -56,7 +56,7 @@ class fun(Cog):
     async def spongebob(self, ctx, *, text=None):
         await ctx.send(tospongebob(text))
 
-    @commands.command()
+    @commands.command(aliases=["reddit", "red"])
     async def r(self, ctx, sub=None, index=0):
         reddit_data = pull_sub(sub, index)
         if reddit_data["error"] is None:
