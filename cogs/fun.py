@@ -21,7 +21,7 @@ def pull_sub(sub=None, index=0):
         score = top_post["score"]
         image_url = top_post["url"]
         permalink = top_post["permalink"]
-        if image_url.split(".")[-1] not in ["jpg", "jpeg", "png", "bmp"]:
+        if image_url.split(".")[-1] not in ["jpg", "jpeg", "png", "bmp", "gif"]:
             image_url = None
         return {"error": None, "title": title, "author": author, "subreddit":subreddit, "score":score, "image_url":image_url, "permalink": permalink}
     else:
@@ -57,7 +57,7 @@ class fun(Cog):
         await ctx.send(tospongebob(text))
 
     @commands.command()
-    async def reddit(self, ctx, sub=None, index=0):
+    async def r(self, ctx, sub=None, index=0):
         reddit_data = pull_sub(sub, index)
         if reddit_data["error"] is None:
             permalink = reddit_data["permalink"]

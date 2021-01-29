@@ -70,7 +70,7 @@ async def integrations(ctx):
     )
     bot_url=client.user.avatar_url
     embed.set_thumbnail(url=bot_url)
-    embed.add_field(name="`?reddit {subreddit} {index of post}`", value="returns post from reddit. Remeber index starts at 0", inline=False)
+    embed.add_field(name="`?r {subreddit} {index of post}`", value="returns post from reddit. Remeber index starts at 0", inline=False)
     await ctx.send(embed=embed)
 
 client.load_extension("cogs.moderation")
