@@ -12,14 +12,17 @@ class moderation(Cog):
         if ctx.author.guild_permissions.administrator:
             role1 = discord.utils.get(user1.guild.roles, name="muted")
             await user1.add_roles(role1)
-            user_url = user1.avatar_url
+
             embed = discord.Embed(
                 title=f"{user1} has been muted!",
                 description=f"{ctx.author} muted {user1}",
                 colour=0xe86823
             )
+            user_url = user1.avatar_url
             embed.set_thumbnail(url=user_url)
+
             await ctx.send(embed=embed)
+            
         else:
             embed = discord.Embed(
                 title=f"{ctx.author} does not have administrator!",

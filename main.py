@@ -1,6 +1,7 @@
 import discord
 from discord.ext import commands
 
+import os
 from datetime import datetime
 
 client = commands.Bot(command_prefix="?")
@@ -12,4 +13,5 @@ async def on_ready():
 
 client.load_extension("cogs.moderation")
 
-client.run("NzgzNTIwODk5MDY4MTk4OTYy.X8b8sw.klwChSjgAiqWTeJDYR05cuJQbGw")
+TOKEN = os.environ['TOKEN']
+#client.run(os.environ.get("TOKEN"))
