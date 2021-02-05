@@ -14,4 +14,4 @@ async def on_ready():
 client.load_extension("cogs.moderation")
 
 TOKEN = os.environ['TOKEN']
-client.run(os.environ.get("TOKEN"))
+client.run(TOKEN)
