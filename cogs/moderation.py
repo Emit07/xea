@@ -8,55 +8,80 @@ class moderation(Cog):
         self.bot = bot
     
     @commands.command()
-    async def mute(self, ctx, user1 : discord.Member):
+    async def mute(self, ctx, user1 : discord.Member, *, reason=None):
         if ctx.author.guild_permissions.administrator:
-            role1 = discord.utils.get(user1.guild.roles, name="muted")
-            await user1.add_roles(role1)
+            if not user1.guild_permissions.administrator:
+                guild = ctx.guild
+                muted_role = discord.utils.get(guild.roles, name="Muted")
 
-            embed = discord.Embed(
-                title=f"{user1} has been muted!",
-                description=f"{ctx.author} muted {user1}",
-                colour=0xe86823
-            )
-            user_url = user1.avatar_url
-            embed.set_thumbnail(url=user_url)
+                if not muted_role:
+                    muted_role = await guild.create_role(name="Muted")
 
-            await ctx.send(embed=embed)
-            
-        else:
-            embed = discord.Embed(
-                title=f"{ctx.author} does not have administrator!",
-                description=f"{ctx.author} cannot mute people.",
-                colour=0xe86823
-            )
-            await ctx.send(embed=embed)
+                    for channel in guild.channels:
+                        print(channel)
+                        await channel.set_permissions(muted_role, speak=False, send_messages=False)
+                await user1.add_roles(muted_role)
+
+                embed = discord.Embed(
+                    title=f"{user1} has been muted!",
+                    description=f"**Reason:** {reason}",
+                    colour=0xe86823
+                )
+                user_url = user1.avatar_url
+                embed.set_thumbnail(url=user_url)
+
+                await ctx.send(embed=embed)
+            else:
+                embed = discord.Embed(
+                    title=":x: you cannot mute an administrator",
+                    colour=0xe86823
+                )
+                await ctx.send(embed=embed)
 
     @commands.command()
     async def unmute(self, ctx, user1 : discord.Member):
-        role1 = discord.utils.get(user1.guild.roles, name="muted")
-        await user1.remove_roles(role1)
-        user_url = user1.avatar_url
-        embed = discord.Embed(
-            title=f"{user1} has been unmuted!",
-            description=f"{ctx.author} unmuted {user1}",
-            colour=0xe86823
-        )
-        embed.set_thumbnail(url=user_url)
-        await ctx.send(embed=embed)
+        if ctx.author.guild_permissions.administrator:
+            if not user1.guild_permissions.administrator:
+                guild = ctx.guild
+                muted_role = discord.utils.get(guild.roles, name="Muted")
+
+                if not muted_role:
+                    muted_role = await guild.create_role(name="Muted")
+
+                    for channel in guild.channels:
+                        print(channel)
+                        await channel.set_permissions(muted_role, speak=False, send_messages=False)
+                await user1.remove_roles(muted_role)
+
+                embed = discord.Embed(
+                    title=f"{user1} has been unmuted!",
+                    colour=0xe86823
+                )
+                user_url = user1.avatar_url
+                embed.set_thumbnail(url=user_url)
+
+                await ctx.send(embed=embed)
+            else:
+                embed = discord.Embed(
+                    title=":x: you cannot unmute an administrator",
+                    colour=0xe86823
+                )
+                await ctx.send(embed=embed)
 
     @commands.command()
     async def clear(self, ctx, amount=1, args=None):
-        if amount > 0:
-            try:
-                await ctx.channel.purge(limit=amount+1)
-                if args not in ["-n", "-h"]:
-                    if amount > 1:
-                        await ctx.send(f":white_check_mark: | successfully cleared {amount} messages")
-                    else:
-                        await ctx.send(f":white_check_mark: | successfully cleared {amount} message")
-            except:
-                if args in ["-n", "-h"]:
-                    await ctx.send(f":x: | Error! could not clear messages")
+        if ctx.author.guild_permissions.administrator:
+            if amount > 0:
+                try:
+                    await ctx.channel.purge(limit=amount+1)
+                    if args not in ["-n", "-h"]:
+                        if amount > 1:
+                            await ctx.send(f":white_check_mark: | successfully cleared {amount} messages")
+                        else:
+                            await ctx.send(f":white_check_mark: | successfully cleared {amount} message")
+                except:
+                    if args in ["-n", "-h"]:
+                        await ctx.send(f":x: | Error! could not clear messages")
 
 
 def setup(bot):
