@@ -10,7 +10,7 @@ client.remove_command("help")
 @client.event
 async def on_ready():
     print(f'XEA has launched at {datetime.now()}')
-    activity = discord.Game(name="in Development", type=3)
+    activity = discord.Game(name="?help", type=3)
     await client.change_presence(status=discord.Status.online, activity=activity)    
 
 @client.group(invoke_without_command=True)

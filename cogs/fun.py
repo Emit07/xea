@@ -10,7 +10,7 @@ import requests
 class fun(Cog):
     def __init__(self, bot):
         self.bot = bot
-    
+
     @commands.command()
     async def hug(self, ctx, user1 : discord.Member=None):
         if user1 is not None:
