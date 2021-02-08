@@ -10,13 +10,14 @@ client.remove_command("help")
 @client.event
 async def on_ready():
     print(f'XEA has launched at {datetime.now()}')
-    activity = discord.Game(name="?help", type=3)
+    amount_servers = len(client.servers)
+    activity = discord.Game(name=f"?help | {amount_servers} servers", type=3)
     await client.change_presence(status=discord.Status.online, activity=activity)    
 
 @client.group(invoke_without_command=True)
 async def help(ctx):
     embed = discord.Embed(
-        title="Xea Commands",
+        title="SlimBot Commands",
         colour=0xe86823
     )
     bot_url=client.user.avatar_url
@@ -28,7 +29,7 @@ async def help(ctx):
 @help.command()
 async def moderation(ctx):
     embed = discord.Embed(
-        title="Xea Moderation Commands",
+        title="SlimBot Moderation Commands",
         colour=0xe86823
     )
     bot_url=client.user.avatar_url
