@@ -68,6 +68,11 @@ class fun(Cog):
         embed.set_thumbnail(url=user_avatar)
         await ctx.send(embed=embed)
 
+    @commands.command()
+    async def gay(self, ctx):
+        r = requests.get(f"https://some-random-api.ml/canvas/wasted/?avatar={ctx.author.avatar_url}")
+        await ctx.send(r.json())
+
     @commands.command(aliases=["reddit", "red"])
     async def r(self, ctx, sub=None, index=0):
         reddit_data = pull_sub(sub, index)
