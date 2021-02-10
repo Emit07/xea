@@ -32,8 +32,9 @@ async def help(ctx):
     )
     bot_url=client.user.avatar_url
     embed.set_thumbnail(url=bot_url)
-    embed.add_field(name="Moderation", value="`?help moderation`", inline=True)
-    embed.add_field(name="Fun", value="`?help fun`", inline=True)
+    embed.add_field(name="Moderation", value="`?help moderation`", inline=False)
+    embed.add_field(name="Fun", value="`?help fun`", inline=False)
+    embed.add_field(name="Integrations", value="`?help integrations`", inline=False)
     await ctx.send(embed=embed)
 
 @help.command()
@@ -59,6 +60,17 @@ async def fun(ctx):
     embed.set_thumbnail(url=bot_url)
     embed.add_field(name="`?hug [user]`", value="hugs the specified user", inline=False)
     embed.add_field(name="`?spongebob [text]`", value="turns the given text into sPoNGebOB cAsE", inline=False)
+    await ctx.send(embed=embed)
+
+@help.command()
+async def integrations(ctx):
+    embed = discord.Embed(
+        title="Xea Integration Commands",
+        colour=0xe86823
+    )
+    bot_url=client.user.avatar_url
+    embed.set_thumbnail(url=bot_url)
+    embed.add_field(name="`?reddit {subreddit} {index of post}`", value="returns post from reddit. Remeber index starts at 0", inline=False)
     await ctx.send(embed=embed)
 
 client.load_extension("cogs.moderation")
