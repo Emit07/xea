@@ -56,6 +56,18 @@ class fun(Cog):
     async def spongebob(self, ctx, *, text=None):
         await ctx.send(tospongebob(text))
 
+    @commands.command()
+    async def avatar(self, ctx, user=None):
+        if user is None:
+            user = ctx.author
+        embed = discord.Embed(
+                    title=f"{user}\'s avatar",
+                    colour=0xe86823
+                )
+        user_avatar = user.avatar_url
+        embed.set_thumbnail(url=user_avatar)
+        await ctx.send(embed=embed)
+
     @commands.command(aliases=["reddit", "red"])
     async def r(self, ctx, sub=None, index=0):
         reddit_data = pull_sub(sub, index)
