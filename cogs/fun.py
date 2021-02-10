@@ -57,7 +57,7 @@ class fun(Cog):
         await ctx.send(tospongebob(text))
 
     @commands.command()
-    async def avatar(self, ctx, user=None):
+    async def avatar(self, ctx, user : discord.Member=None):
         if user is None:
             user = ctx.author
         embed = discord.Embed(
