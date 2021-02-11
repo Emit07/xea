@@ -75,32 +75,40 @@ class fun(Cog):
 
     @commands.command(aliases=["reddit", "red"])
     async def r(self, ctx, sub=None, index=0):
-        reddit_data = pull_sub(sub, index)
-        if reddit_data["error"] is None:
-            permalink = reddit_data["permalink"]
-            link = f"https://reddit.com{permalink}"
-            score = reddit_data["score"]
-            title = reddit_data["title"]
-            subreddit = reddit_data["subreddit"]
-            embed_title = f"{title} | {subreddit}"
-            embed = discord.Embed(
-                    title=embed_title,
-                    url=link,
-                    colour=0xe86823
-                )
-            img_url = reddit_data["image_url"]
-            author = reddit_data["author"]
-            embed.set_footer(text=f"u/{author} | score : {score}")
-            if img_url != None:
-                embed.set_image(url=img_url)
-        else:
-            error = reddit_data["error"]
-            embed = discord.Embed(
-                    title=f"Error : {error}",
-                    colour=0xe86823
-                )
+        if sub not in ["5050", "fiftyfifty", "gore"]:
+            reddit_data = pull_sub(sub, index)
+            if reddit_data["error"] is None:
+                permalink = reddit_data["permalink"]
+                link = f"https://reddit.com{permalink}"
+                score = reddit_data["score"]
+                title = reddit_data["title"]
+                subreddit = reddit_data["subreddit"]
+                embed_title = f"{title} | {subreddit}"
+                embed = discord.Embed(
+                        title=embed_title,
+                        url=link,
+                        colour=0xe86823
+                    )
+                img_url = reddit_data["image_url"]
+                author = reddit_data["author"]
+                embed.set_footer(text=f"u/{author} | score : {score}")
+                if img_url != None:
+                    embed.set_image(url=img_url)
+            else:
+                error = reddit_data["error"]
+                embed = discord.Embed(
+                        title=f"Error : {error}",
+                        colour=0xe86823
+                    )
 
-        await ctx.send(embed=embed)
+            await ctx.send(embed=embed)
+        else:
+            embed = discord.Embed(
+                title=f"This Subreddit has been banned from this bot",
+                colour=0xe86823
+            )
+
+            await ctx.send(embed=embed)
 
 
 def setup(bot):
