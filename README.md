@@ -8,7 +8,7 @@ This bot was created for [this](https://discord.gg/8ywmBtp7kK "Join Our Discord"
 
 ## Running the Bot
 
-If your global python version is not 3.x use pip3 instead of pip while following along.
+If your global python version is not 3.x use pip3 instead of pip while following along below.
 
 First install discord.py using pip.
 
