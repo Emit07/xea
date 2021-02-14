@@ -12,20 +12,20 @@ https://bit.ly/3jQsMBN
 
 ### Creating your Discord Bot
 
-##### Creating the application
+#### Creating the application
 1. Go to the [discord developer portal](https://discord.com/developers/applications/ "discord dev portal") and click on "New Application" and Give it the name of your discord bot, this application will house the discord bot. 
 
-##### Adding the bot
+#### Adding the bot
 
-1. After you create a new application go to the "Bot" section and click on the "Add Bot" button, clicking on the add bot button will give you a warning and click on "Yes, do it!" if you have made a fresh new app for this bot. From there you can change its name and profile picture if you want.
+2. After you create a new application go to the "Bot" section and click on the "Add Bot" button, clicking on the add bot button will give you a warning and click on "Yes, do it!" if you have made a fresh new app for this bot. From there you can change its name and profile picture if you want.
 
-##### Getting the Token
+#### Getting the Token
 
-1. Next to the profile picture there will be buttons, you will want to copy the token and make sure that no one else knows what the token is because the will have access to the bot and possibly even the server with administrator. You will want to put this token in the environment variables. You can now run the bot however it will not be on any discord servers. 
+3. Next to the profile picture there will be buttons, you will want to copy the token and make sure that no one else knows what the token is because the will have access to the bot and possibly even the server with administrator. You will want to put this token in the environment variables. You can now run the bot however it will not be on any discord servers. 
 
-##### Adding the bot to Servers
+#### Adding the bot to Servers
 
-1. To add the bot to discord servers you will need to go to the "OAuth2" tab on the left. On the "scopes" section click on "bot", then scroll down and give the bot administrator permissions. Copy the given link and put it into a new tab of your web browser of choice. Make sure you are signed into your discord account, you can add the bot to any discord servers where you are either the owner or have administrator permissions. You are now ready to set up the rest.
+4. To add the bot to discord servers you will need to go to the "OAuth2" tab on the left. On the "scopes" section click on "bot", then scroll down and give the bot administrator permissions. Copy the given link and put it into a new tab of your web browser of choice. Make sure you are signed into your discord account, you can add the bot to any discord servers where you are either the owner or have administrator permissions. You are now ready to set up the rest.
 
 ### Installing dependencies 
 
