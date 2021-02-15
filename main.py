@@ -75,6 +75,7 @@ async def integrations(ctx):
     await ctx.send(embed=embed)
 
 client.load_extension("cogs.moderation")
+client.load_extension("cogs.info")
 client.load_extension("cogs.fun")
 
 TOKEN = os.environ['TOKEN']
