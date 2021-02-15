@@ -4,6 +4,7 @@ from discord.ext import commands
 from discord.ext.commands import Cog
 
 from datetime import datetime
+import datetime
 
 class info(Cog):
     def __init__(self, bot):

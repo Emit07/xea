@@ -50,7 +50,7 @@ Set your environment variable to the bot token
 * [x] command to turn input text into sPoNgEbOB case
 * [x] hug command that returns a gif of an anime hug to hug other user
 * [x] command that pulls posts from reddit with webscraping
-* [ ] uptime command
+* [x] uptime command
 * [ ] Role on join
 * [ ] Self role (using reactions)
 * [ ] ban and kick commands
