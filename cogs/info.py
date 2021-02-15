@@ -9,7 +9,7 @@ import datetime
 class info(Cog):
     def __init__(self, bot):
         self.bot = bot
-        self.starttime = print(str(datetime.datetime.now()).split('.')[0])
+        self.starttime = str(datetime.datetime.now()).split('.')[0]
 
     @commands.command()
     async def uptime(self, ctx):
