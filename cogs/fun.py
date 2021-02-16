@@ -4,6 +4,8 @@ from discord.ext import commands
 from discord.ext.commands import Cog
 
 from spongebobcase import tospongebob
+import lang_modify
+
 import json
 import requests
 
@@ -61,12 +63,35 @@ class fun(Cog):
         if user is None:
             user = ctx.author
         embed = discord.Embed(
-                    title=f"{user}\'s avatar",
-                    colour=0xe86823
-                )
+            title=f"{user}\'s avatar",
+            colour=0xe86823
+        )
         user_avatar = user.avatar_url
         embed.set_thumbnail(url=user_avatar)
         await ctx.send(embed=embed)
+
+    @commands.command()
+    async def owo(self, ctx, *, text=None):
+        if text is not None:
+            owo_text = lang_modify.owofy(text)
+            await ctx.send(owo_text)
+        else:
+            embed = discord.Embed(
+                title=":x: | You have to input text to owofy",
+                colour=0xe86823
+            )
+
+    @commands.command()
+    async def clap(self, ctx, *, text=None):
+        if text is not None:
+            clap_text = lang_modify.clap_emojifier(text)
+            await ctx.send(clap_text)
+        else:
+            embed = discord.Embed(
+                title=":x: | You have to input text to clapify",
+                colour=0xe86823
+            )
+            
 
     @commands.command()
     async def gay(self, ctx):
