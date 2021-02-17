@@ -21,7 +21,8 @@ class info(Cog):
     
     @commands.command()
     async def userinfo(self, ctx, user1 : discord.Member=None):
-        user1 = ctx.author if discord.Member == None
+        if discord.Member == None:
+            user1 = ctx.author
         embed = discord.Embed(
             title=f"{user1}\'s info",
             colour=0xe86823
