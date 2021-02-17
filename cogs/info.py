@@ -54,7 +54,7 @@ class info(Cog):
         embed.add_field(name="Members ", value=f"`{len(ctx.guild.members)}`", inline=False)
         embed.add_field(name="Humans ", value=f"`{len(list(filter(lambda m: not m.bot, ctx.guild.members)))}`", inline=False)
         embed.add_field(name="Bots ", value=f"`{len(list(filter(lambda m: m.bot, ctx.guild.members)))}`", inline=False)
-        embed.add_field(name="Bans", value=f"`{len(await ctx.guild.bans())}`", inline=False)
+        embed.add_field(name="Bans", value=f"`{len(ctx.guild.bans())}`", inline=False)
         embed.add_field(name="Status", value=f"`{🟢 {statuses[0]} 🟠 {statuses[1]} 🔴 {statuses[2]} ⚪ {statuses[3]}}`", inline=False)
         embed.add_field(name="Text Channels ", value=f"`{len(ctx.guild.text_channels)}`", inline=False)
         embed.add_field(name="Voice Channels ", value=f"`{len(ctx.guild.voice_channels)}`", inline=False)
