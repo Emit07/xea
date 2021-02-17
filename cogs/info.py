@@ -35,7 +35,7 @@ class info(Cog):
         embed.add_field(name="Created at ", value=f"`{created_at}`", inline=False)
         embed.add_field(name="Joined at ", value=f"`{joined_at}`", inline=False)
         embed.add_field(name="Boosted ", value=f"`{bool(user1.premium_since)}`", inline=False)
-        embed.add_field(name="Activity ", value=f"`{str(target.activity.type).split('.')[-1].title() if target.activity else 'N/A'} {target.activity.name if target.activity else ''}`", inline=False)
+        embed.add_field(name="Activity ", value=f"`{str(user1.activity.type).split('.')[-1].title() if target.activity else 'N/A'} {target.activity.name if target.activity else ''}`", inline=False)
 
         await ctx.send(embed=embed)
     
@@ -46,7 +46,6 @@ class info(Cog):
             colour=0xe86823
         )
         created_at = ctx.guild.created_at.strftime("%d/%m/%Y %H:%M:%S")
-        joined_at = user1.joined_at.strftime("%d/%m/%Y %H:%M:%S")
         embed.add_field(name="Owner ", value=f"`{ctx.guild.owner}`", inline=False)
         embed.add_field(name="ID ", value=f"`{ctx.guild.id}`", inline=False)
         embed.add_field(name="Region ", value=f"`{ctx.guild.region}`", inline=False)
