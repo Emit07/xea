@@ -78,5 +78,5 @@ client.load_extension("cogs.moderation")
 client.load_extension("cogs.info")
 client.load_extension("cogs.fun")
 
-TOKEN = os.environ['TOKEN']
-client.run(TOKEN)
+#TOKEN = os.environ['TOKEN']
+client.run("NzgzNTIwODk5MDY4MTk4OTYy.X8b8sw.42VujpkeNv3eG-pWyNJ9YENxE1w")
