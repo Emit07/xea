@@ -51,6 +51,7 @@ Set your environment variable to the bot token
 * [x] hug command that returns a gif of an anime hug to hug other user
 * [x] command that pulls posts from reddit with webscraping
 * [x] uptime command
+* [ ] streamline fun.py file (bloated with functions) 
 * [ ] Role on join
 * [ ] Self role (using reactions)
 * [ ] ban and kick commands
