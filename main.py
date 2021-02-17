@@ -34,6 +34,7 @@ async def help(ctx):
     embed.set_thumbnail(url=bot_url)
     embed.add_field(name="Moderation", value="`?help moderation`", inline=False)
     embed.add_field(name="Fun", value="`?help fun`", inline=False)
+    embed.add_field(name="Info", value="`?help info`", inline=False)
     embed.add_field(name="Integrations", value="`?help integrations`", inline=False)
     await ctx.send(embed=embed)
 
@@ -63,6 +64,18 @@ async def fun(ctx):
     embed.add_field(name="`?avatar {user}`", value="will get the avatar of specified user, if left empty gets authors avatar", inline=False)
     embed.add_field(name="`?owo [text]`", value="this will return owofied text", inline=False)
     embed.add_field(name="`?clap [text]`", value="this will add clap emojis to your text", inline=False)
+    await ctx.send(embed=embed)
+
+@help.command()
+async def info(ctx):
+    embed = discord.Embed(
+        title="Xea Info Commands",
+        colour=0xe86823
+    )
+    bot_url=client.user.avatar_url
+    embed.set_thumbnail(url=bot_url)
+    embed.add_field(name="`?userinfo {user}`", value="gives you info about the user", inline=False)
+    embed.add_field(name="`?serverinfo`", value="gives you info about the server", inline=False)
     await ctx.send(embed=embed)
 
 @help.command()
