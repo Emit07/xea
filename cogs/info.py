@@ -21,7 +21,7 @@ class info(Cog):
     
     @commands.command()
     async def userinfo(self, ctx, user1 : discord.Member=None):
-        if discord.Member == None:
+        if user1 is None:
             user1 = ctx.author
         embed = discord.Embed(
             title=f"{user1}\'s info",
@@ -30,7 +30,7 @@ class info(Cog):
         created_at = user1.created_at.strftime("%d/%m/%Y %H:%M:%S")
         joined_at = user1.joined_at.strftime("%d/%m/%Y %H:%M:%S")
         embed.add_field(name="Name ", value=f"`{str(user1)}`", inline=False)
-        embed.add_field(name="Top Role ", value=f"`{user1.top_role.mention}`", inline=False)
+        embed.add_field(name="Top Role ", value=f"`{user1.top_role}`", inline=False)
         embed.add_field(name="Is Bot ", value=f"`{str(user1)}`", inline=False)
         embed.add_field(name="Created at ", value=f"`{created_at}`", inline=False)
         embed.add_field(name="Joined at ", value=f"`{joined_at}`", inline=False)
@@ -43,11 +43,19 @@ class info(Cog):
     async def serverinfo(self, ctx):
         embed = discord.Embed(
             title=f"Server Info",
-            colour=0xe86823
+            colour=0xe86823,
+            timestamp=datetime.utcnow()
         )
         created_at = ctx.guild.created_at.strftime("%d/%m/%Y %H:%M:%S")
+
         bans_raw = await ctx.guild.bans()
         bans = len(bans_raw)
+
+        statuses = [len(list(filter(lambda m: str(m.status) == "online", ctx.guild.members))),
+					len(list(filter(lambda m: str(m.status) == "idle", ctx.guild.members))),
+					len(list(filter(lambda m: str(m.status) == "dnd", ctx.guild.members))),
+					len(list(filter(lambda m: str(m.status) == "offline", ctx.guild.members)))]
+
         embed.add_field(name="Owner ", value=f"`{ctx.guild.owner}`", inline=False)
         embed.add_field(name="ID ", value=f"`{ctx.guild.id}`", inline=False)
         embed.add_field(name="Region ", value=f"`{ctx.guild.region}`", inline=False)
