@@ -30,12 +30,12 @@ class info(Cog):
         created_at = user1.created_at.strftime("%d/%m/%Y %H:%M:%S")
         joined_at = user1.joined_at.strftime("%d/%m/%Y %H:%M:%S")
         embed.add_field(name="Name ", value=f"`{str(user1)}`", inline=False)
-        embed.add_field(name="Top Role ", value=f"`{target.top_role.mention}`", inline=False)
+        embed.add_field(name="Top Role ", value=f"`{user1.top_role.mention}`", inline=False)
         embed.add_field(name="Is Bot ", value=f"`{str(user1)}`", inline=False)
         embed.add_field(name="Created at ", value=f"`{created_at}`", inline=False)
         embed.add_field(name="Joined at ", value=f"`{joined_at}`", inline=False)
         embed.add_field(name="Boosted ", value=f"`{bool(user1.premium_since)}`", inline=False)
-        embed.add_field(name="Activity ", value=f"`{str(user1.activity.type).split('.')[-1].title() if target.activity else 'N/A'} {target.activity.name if target.activity else ''}`", inline=False)
+        embed.add_field(name="Activity ", value=f"`{str(user1.activity.type).split('.')[-1].title() if user1.activity else 'N/A'} {user1.activity.name if user1.activity else ''}`", inline=False)
 
         await ctx.send(embed=embed)
     
@@ -46,6 +46,8 @@ class info(Cog):
             colour=0xe86823
         )
         created_at = ctx.guild.created_at.strftime("%d/%m/%Y %H:%M:%S")
+        bans_raw = await ctx.guild.bans()
+        bans = len(bans_raw)
         embed.add_field(name="Owner ", value=f"`{ctx.guild.owner}`", inline=False)
         embed.add_field(name="ID ", value=f"`{ctx.guild.id}`", inline=False)
         embed.add_field(name="Region ", value=f"`{ctx.guild.region}`", inline=False)
@@ -53,7 +55,7 @@ class info(Cog):
         embed.add_field(name="Members ", value=f"`{len(ctx.guild.members)}`", inline=False)
         embed.add_field(name="Humans ", value=f"`{len(list(filter(lambda m: not m.bot, ctx.guild.members)))}`", inline=False)
         embed.add_field(name="Bots ", value=f"`{len(list(filter(lambda m: m.bot, ctx.guild.members)))}`", inline=False)
-        embed.add_field(name="Bans", value=f"`{len(ctx.guild.bans())}`", inline=False)
+        embed.add_field(name="Bans", value=f"`{bans}`", inline=False)
         embed.add_field(name="Status", value=f"`:green_circle: {statuses[0]} :green_circle: {statuses[1]} :red_circle: {statuses[2]} :white_circle: {statuses[3]}`", inline=False)
         embed.add_field(name="Text Channels ", value=f"`{len(ctx.guild.text_channels)}`", inline=False)
         embed.add_field(name="Voice Channels ", value=f"`{len(ctx.guild.voice_channels)}`", inline=False)
