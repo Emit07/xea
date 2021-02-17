@@ -1,5 +1,5 @@
 import discord
-from discord import Embed
+from discord import Embed, Member
 from discord.ext import commands
 from discord.ext.commands import Cog
 
@@ -42,7 +42,7 @@ class info(Cog):
     @commands.command()
     async def serverinfo(self, ctx):
         embed = discord.Embed(
-            title=f"{user1}\'s info",
+            title=f"Server Info",
             colour=0xe86823
         )
         created_at = ctx.guild.created_at.strftime("%d/%m/%Y %H:%M:%S")
