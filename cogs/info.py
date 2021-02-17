@@ -27,8 +27,12 @@ class info(Cog):
             title=f"{user1}\'s info",
             colour=0xe86823
         )
+
         created_at = user1.created_at.strftime("%d/%m/%Y %H:%M:%S")
         joined_at = user1.joined_at.strftime("%d/%m/%Y %H:%M:%S")
+
+        embed.set_thumbnail(url=user1.avatar_url)
+
         embed.add_field(name="Name ", value=f"`{str(user1)}`", inline=False)
         embed.add_field(name="Top Role ", value=f"`{user1.top_role}`", inline=False)
         embed.add_field(name="Is Bot ", value=f"`{str(user1)}`", inline=False)
@@ -54,6 +58,8 @@ class info(Cog):
 					len(list(filter(lambda m: str(m.status) == "idle", ctx.guild.members))),
 					len(list(filter(lambda m: str(m.status) == "dnd", ctx.guild.members))),
 					len(list(filter(lambda m: str(m.status) == "offline", ctx.guild.members)))]
+
+        embed.set_thumbnail(url=ctx.guild.icon_url)
 
         embed.add_field(name="Owner ", value=f"`{ctx.guild.owner}`", inline=False)
         embed.add_field(name="ID ", value=f"`{ctx.guild.id}`", inline=False)
