@@ -61,6 +61,8 @@ async def fun(ctx):
     embed.add_field(name="`?hug [user]`", value="hugs the specified user", inline=False)
     embed.add_field(name="`?spongebob [text]`", value="turns the given text into sPoNGebOB cAsE", inline=False)
     embed.add_field(name="`?avatar {user}`", value="will get the avatar of specified user, if left empty gets authors avatar", inline=False)
+    embed.add_field(name="`?owo [text]`", value="this will return owofied text", inline=False)
+    embed.add_field(name="`?clap [text]`", value="this will add clap emojis to your text", inline=False)
     await ctx.send(embed=embed)
 
 @help.command()
