@@ -35,7 +35,7 @@ class info(Cog):
 
         embed.add_field(name="Name ", value=f"`{str(user1)}`", inline=False)
         embed.add_field(name="Top Role ", value=f"`{user1.top_role}`", inline=False)
-        embed.add_field(name="Is Bot ", value=f"`{str(user1)}`", inline=False)
+        embed.add_field(name="Is Bot ", value=f"`{str(user1.bot)}`", inline=False)
         embed.add_field(name="Created at ", value=f"`{created_at}`", inline=False)
         embed.add_field(name="Joined at ", value=f"`{joined_at}`", inline=False)
         embed.add_field(name="Boosted ", value=f"`{bool(user1.premium_since)}`", inline=False)
