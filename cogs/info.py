@@ -43,8 +43,7 @@ class info(Cog):
     async def serverinfo(self, ctx):
         embed = discord.Embed(
             title=f"Server Info",
-            colour=0xe86823,
-            timestamp=datetime.utcnow()
+            colour=0xe86823
         )
         created_at = ctx.guild.created_at.strftime("%d/%m/%Y %H:%M:%S")
 
