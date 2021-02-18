@@ -43,7 +43,7 @@ class moderation(Cog):
 
     @commands.command()
     async def unmute(self, ctx, user1 : discord.Member):
-        if ctx.author.guild_permissions.administrator || ctx.author.roles in self.mod_roles:
+        if ctx.author.guild_permissions.administrator or ctx.author.roles in self.mod_roles:
             if not user1.guild_permissions.administrator:
                 guild = ctx.guild
                 muted_role = discord.utils.get(guild.roles, name="Muted")
