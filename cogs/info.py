@@ -44,34 +44,12 @@ class info(Cog):
         await ctx.send(embed=embed)
     
     @commands.command()
-    async def serverinfo(self, ctx):
+    async def icon(self, ctx):
         embed = discord.Embed(
-            title=f"Server Info",
+            title=f"Server Icon",
             colour=0xe86823
         )
-        created_at = ctx.guild.created_at.strftime("%d/%m/%Y %H:%M:%S")
-
-        bans_raw = await ctx.guild.bans()
-        bans = len(bans_raw)
-
-        statuses = [len(list(filter(lambda m: str(m.status) == "online", ctx.guild.members))),
-					len(list(filter(lambda m: str(m.status) == "idle", ctx.guild.members))),
-					len(list(filter(lambda m: str(m.status) == "dnd", ctx.guild.members))),
-					len(list(filter(lambda m: str(m.status) == "offline", ctx.guild.members)))]
-
         embed.set_thumbnail(url=ctx.guild.icon_url)
-
-        embed.add_field(name="Owner ", value=f"`{ctx.guild.owner}`", inline=False)
-        embed.add_field(name="ID ", value=f"`{ctx.guild.id}`", inline=False)
-        embed.add_field(name="Region ", value=f"`{ctx.guild.region}`", inline=False)
-        embed.add_field(name="Created at ", value=f"`{created_at}`", inline=False)
-        embed.add_field(name="Bans", value=f"`{bans}`", inline=False)
-        embed.add_field(name="Status", value=f"`Online: {statuses[0]} \nIdle: {statuses[1]} \nDND: {statuses[2]} \nOffline: {statuses[3]}`", inline=False)
-        embed.add_field(name="Text Channels ", value=f"`{len(ctx.guild.text_channels)}`", inline=False)
-        embed.add_field(name="Voice Channels ", value=f"`{len(ctx.guild.voice_channels)}`", inline=False)
-        embed.add_field(name="Categories ", value=f"`{len(ctx.guild.categories)}`", inline=False)
-        embed.add_field(name="Roles ", value=f"`{len(ctx.guild.roles)}`", inline=False)
-        embed.add_field(name="\u200b ", value="\u200b", inline=False)
 
         await ctx.send(embed=embed)
 

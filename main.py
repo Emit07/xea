@@ -75,7 +75,7 @@ async def info(ctx):
     bot_url=client.user.avatar_url
     embed.set_thumbnail(url=bot_url)
     embed.add_field(name="`?userinfo {user}`", value="gives you info about the user", inline=False)
-    embed.add_field(name="`?serverinfo`", value="gives you info about the server", inline=False)
+    embed.add_field(name="`?icon`", value="gives you server icon", inline=False)
     await ctx.send(embed=embed)
 
 @help.command()

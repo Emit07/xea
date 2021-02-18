@@ -3,9 +3,12 @@ from discord import Embed
 from discord.ext import commands
 from discord.ext.commands import Cog
 
+import json
+
 class moderation(Cog):
     def __init__(self, bot):
         self.bot = bot
+        self.mod_roles = []
     
     @commands.command()
     async def mute(self, ctx, user1 : discord.Member, *, reason=None):
@@ -40,7 +43,7 @@ class moderation(Cog):
 
     @commands.command()
     async def unmute(self, ctx, user1 : discord.Member):
-        if ctx.author.guild_permissions.administrator:
+        if ctx.author.guild_permissions.administrator || ctx.author.roles in self.mod_roles:
             if not user1.guild_permissions.administrator:
                 guild = ctx.guild
                 muted_role = discord.utils.get(guild.roles, name="Muted")
@@ -67,6 +70,29 @@ class moderation(Cog):
                     colour=0xe86823
                 )
                 await ctx.send(embed=embed)
+
+    @commands.command()
+    async def setmod(self, ctx, role1 : discord.Role=None):
+        if role1 is not None:
+            try:
+                self.mod_roles.append(role1)
+                embed = discord.Embed(
+                    title=f":white_check_mark: Added {role1} to mod roles",
+                    colour=0xe86823
+                )
+                await ctx.send(embed=embed)
+            except:
+                embed = discord.Embed(
+                    title=":x: Error",
+                    colour=0xe86823
+                )
+                await ctx.send(embed=embed)
+        else:
+            embed = discord.Embed(
+                title=":x: Error : There needs to be an input for the role",
+                colour=0xe86823
+            )
+            await ctx.send(embed=embed)
 
     @commands.command()
     async def clear(self, ctx, amount=1, args=None):
