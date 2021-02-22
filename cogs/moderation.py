@@ -12,7 +12,7 @@ class moderation(Cog):
     
     @commands.command()
     async def mute(self, ctx, user1 : discord.Member, *, reason=None):
-        if ctx.author.guild_permissions.administrator:
+        if ctx.author.guild_permissions.manage_messages:
             if not user1.guild_permissions.administrator:
                 guild = ctx.guild
                 muted_role = discord.utils.get(guild.roles, name="Muted")
@@ -43,7 +43,7 @@ class moderation(Cog):
 
     @commands.command()
     async def unmute(self, ctx, user1 : discord.Member):
-        if ctx.author.guild_permissions.administrator or ctx.author.roles in self.mod_roles:
+        if ctx.author.guild_permissions.manage_messages:
             if not user1.guild_permissions.administrator:
                 guild = ctx.guild
                 muted_role = discord.utils.get(guild.roles, name="Muted")
@@ -96,7 +96,7 @@ class moderation(Cog):
 
     @commands.command()
     async def clear(self, ctx, amount=1, args=None):
-        if ctx.author.guild_permissions.administrator:
+        if ctx.author.guild_permissions.manage_messages:
             if amount > 0:
                 try:
                     await ctx.channel.purge(limit=amount+1)
