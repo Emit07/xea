@@ -48,6 +48,7 @@ async def moderation(ctx):
     embed.set_thumbnail(url=bot_url)
     embed.add_field(name="`?mute [user] [reason]`", value="mutes a user in text channels", inline=False)
     embed.add_field(name="`?unmute [user]`", value="unmutes a user in text channels", inline=False)
+    embed.add_field(name="`?warn [user] [reason]`", value="warns user (still working on system)", inline=False)
     embed.add_field(name="`?clear [amount]`", value="deletes a specified amount of messages", inline=False)
     await ctx.send(embed=embed)
 
