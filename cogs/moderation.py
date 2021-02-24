@@ -80,7 +80,7 @@ class moderation(Cog):
             if not user1.guild_permissions.administrator:
                 embed = discord.Embed(
                     title=f"{user1} has been Warned",
-                    description=reason,
+                    description=f"reason: {reason}",
                     colour=0xeb4034
                 )
                 user_url = user1.avatar_url
