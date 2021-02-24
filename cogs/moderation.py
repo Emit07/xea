@@ -6,6 +6,9 @@ from discord.ext.commands import Cog
 import json
 
 class moderation(Cog):
+
+    WARNS = {} ### {"USER": {"amount": *, "muted": false}}
+
     def __init__(self, bot):
         self.bot = bot
         self.mod_roles = []
@@ -72,27 +75,26 @@ class moderation(Cog):
                 await ctx.send(embed=embed)
 
     @commands.command()
-    async def setmod(self, ctx, role1 : discord.Role=None):
-        if role1 is not None:
-            try:
-                self.mod_roles.append(role1)
+    async def warn(self, ctx, user1 : discord.Member=None, *, reason=None):
+        if ctx.author.guild_permissions.manage_messages:
+            if not user1.guild_permissions.administrator:
                 embed = discord.Embed(
-                    title=f":white_check_mark: Added {role1} to mod roles",
+                    title=f"{user1} has been Warned",
+                    colour=0xeb4034
+                )
+                user_url = user1.avatar_url
+                embed.set_thumbnail(url=user_url)
+
+                await ctx.send(embed=embed)
+
+            else:
+                embed = discord.Embed(
+                    title=":x: you cannot warn an administrator",
                     colour=0xe86823
                 )
+
                 await ctx.send(embed=embed)
-            except:
-                embed = discord.Embed(
-                    title=":x: Error",
-                    colour=0xe86823
-                )
-                await ctx.send(embed=embed)
-        else:
-            embed = discord.Embed(
-                title=":x: Error : There needs to be an input for the role",
-                colour=0xe86823
-            )
-            await ctx.send(embed=embed)
+
 
     @commands.command()
     async def clear(self, ctx, amount=1, args=None):
