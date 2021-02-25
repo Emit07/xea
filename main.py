@@ -26,7 +26,7 @@ async def jazz(ctx):
 
     await channel.connect()
 
-    vserver = ctx.message.guild
+    server = ctx.message.guild
     voice_channel = server.voice_client
     
     voice_channel.play(discord.FFmpegPCMAudio("song.mp3"))
