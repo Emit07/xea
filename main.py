@@ -1,7 +1,8 @@
 import discord
 from discord.ext import commands
-
 from discord.voice_client import VoiceClient
+
+import youtube_dl
 
 import os
 from datetime import datetime
