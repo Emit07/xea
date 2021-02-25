@@ -16,28 +16,26 @@ async def on_ready():
 
 @client.command()
 async def jazz(ctx):
-    voiceChannel = discord.utils.get(ctx.guild.voice_channels, name="General")
-    voice = discord.utils.get(client.voice_clients, guild=ctx.guild)
-    if not voice.is_connected():
-        await voiceChannel.connect()
-        
     song_there = os.path.isfile("song.mp3")
     try:
         if song_there:
             os.remove("song.mp3")
     except PermissionError:
         await ctx.send("Wait for the current playing music to end or use the 'stop' command")
+        return
+
+    voiceChannel = discord.utils.get(ctx.guild.voice_channels, name='General')
+    await voiceChannel.connect()
+    voice = discord.utils.get(client.voice_clients, guild=ctx.guild)
 
     ydl_opts = {
-    'format': 'bestaudio/best',
-    'postprocessors': [{
-        'key': 'FFmpegExtractAudio',
-        'preferredcodec': 'mp3',
-        'preferredquality': '192',
-    }],
+        'format': 'bestaudio/best',
+        'postprocessors': [{
+            'key': 'FFmpegExtractAudio',
+            'preferredcodec': 'mp3',
+            'preferredquality': '192',
+        }],
     }
-
-
     with youtube_dl.YoutubeDL(ydl_opts) as ydl:
         ydl.download(["https://www.youtube.com/watch?v=Rm48uz2emp8"])
     for file in os.listdir("./"):
