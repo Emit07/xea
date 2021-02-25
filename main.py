@@ -59,8 +59,8 @@ async def on_ready():
     activity = discord.Game(name=f"?help | {amount_servers} servers", type=3)
     await client.change_presence(status=discord.Status.online, activity=activity)    
 
-@client.command()
-async def jazz(ctx, url=None):
+@client.command(aliases=['p'])
+async def play(ctx, url=None):
     if url is not None:
         if not ctx.author.voice:
             await ctx.send(":x: You are not connected to a voice channel!")
