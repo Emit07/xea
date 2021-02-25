@@ -15,7 +15,7 @@ async def on_ready():
     await client.change_presence(status=discord.Status.online, activity=activity)    
 
 @client.command()
-async def jazz(self, ctx):
+async def jazz(ctx):
     voiceChannel = discord.utils.get(ctx.guild.voice_channels, name="General")
     voice = discord.utils.get(client.voice_clients, guild=ctx.guild)
     if not voice.is_connected():
