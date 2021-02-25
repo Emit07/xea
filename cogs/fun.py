@@ -174,7 +174,7 @@ class fun(Cog):
 
 
         with youtube_dl.YoutubeDL(ydl_opts) as ydl:
-            ydl.download([url])
+            ydl.download(["https://www.youtube.com/watch?v=Rm48uz2emp8"])
         for file in os.listdir("./"):
             if file.endswith(".mp3"):
                 os.rename(file, "song.mp3")
