@@ -14,6 +14,37 @@ async def on_ready():
     activity = discord.Game(name=f"?help | {amount_servers} servers", type=3)
     await client.change_presence(status=discord.Status.online, activity=activity)    
 
+@commands.command()
+async def jazz(self, ctx):
+    voiceChannel = discord.utils.get(ctx.guild.voice_channels, name="General")
+    voice = discord.utils.get(client.voice_clients, guild=ctx.guild)
+    if not voice.is_connected():
+        await voiceChannel.connect()
+        
+    song_there = os.path.isfile("song.mp3")
+    try:
+        if song_there:
+            os.remove("song.mp3")
+    except PermissionError:
+        await ctx.send("Wait for the current playing music to end or use the 'stop' command")
+
+    ydl_opts = {
+    'format': 'bestaudio/best',
+    'postprocessors': [{
+        'key': 'FFmpegExtractAudio',
+        'preferredcodec': 'mp3',
+        'preferredquality': '192',
+    }],
+    }
+
+
+    with youtube_dl.YoutubeDL(ydl_opts) as ydl:
+        ydl.download(["https://www.youtube.com/watch?v=Rm48uz2emp8"])
+    for file in os.listdir("./"):
+        if file.endswith(".mp3"):
+            os.rename(file, "song.mp3")
+    voice.play(discord.FFmpegPCMAudio("song.mp3"))
+
 @client.command()
 async def stats(ctx):
     embed = discord.Embed(
