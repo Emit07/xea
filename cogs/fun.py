@@ -150,6 +150,38 @@ class fun(Cog):
         self.bot = bot
 
     @commands.command()
+    async def jazz(self, ctx):
+        voiceChannel = discord.utils.get(ctx.guild.voice_channels, name="General")
+        voice = discord.utils.get(client.voice_clients, guild=ctx.guild)
+        if not voice.is_connected():
+            await voiceChannel.connect()
+        
+        song_there = os.path.isfile("song.mp3")
+        try:
+            if song_there:
+                os.remove("song.mp3")
+        except PermissionError:
+            await ctx.send("Wait for the current playing music to end or use the 'stop' command")
+
+        ydl_opts = {
+        'format': 'bestaudio/best',
+        'postprocessors': [{
+            'key': 'FFmpegExtractAudio',
+            'preferredcodec': 'mp3',
+            'preferredquality': '192',
+        }],
+        }
+
+
+        with youtube_dl.YoutubeDL(ydl_opts) as ydl:
+            ydl.download([url])
+        for file in os.listdir("./"):
+            if file.endswith(".mp3"):
+                os.rename(file, "song.mp3")
+        voice.play(discord.FFmpegPCMAudio("song.mp3"))
+
+
+    @commands.command()
     async def hug(self, ctx, user1 : discord.Member=None):
         if user1 is not None:
             r = requests.get("https://some-random-api.ml/animu/hug")
