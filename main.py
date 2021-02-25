@@ -1,6 +1,8 @@
 import discord
 from discord.ext import commands
 
+from discord.voice_client import VoiceClient
+
 import os
 from datetime import datetime
 
@@ -16,32 +18,18 @@ async def on_ready():
 
 @client.command()
 async def jazz(ctx):
-    song_there = os.path.isfile("song.mp3")
-    try:
-        if song_there:
-            os.remove("song.mp3")
-    except PermissionError:
-        await ctx.send("Wait for the current playing music to end or use the 'stop' command")
+    if not ctx.author.voice:
+        await ctx.send(":x: You are not connected to a voice channel!")
         return
+    else:
+        channel = ctx.message.author.voice.channel
 
-    voiceChannel = discord.utils.get(ctx.guild.voice_channels, name='General')
-    await voiceChannel.connect()
-    voice = discord.utils.get(client.voice_clients, guild=ctx.guild)
+    await channel.connect()
 
-    ydl_opts = {
-        'format': 'bestaudio/best',
-        'postprocessors': [{
-            'key': 'FFmpegExtractAudio',
-            'preferredcodec': 'mp3',
-            'preferredquality': '192',
-        }],
-    }
-    with youtube_dl.YoutubeDL(ydl_opts) as ydl:
-        ydl.download(["https://www.youtube.com/watch?v=Rm48uz2emp8"])
-    for file in os.listdir("./"):
-        if file.endswith(".mp3"):
-            os.rename(file, "song.mp3")
-    voice.play(discord.FFmpegPCMAudio("song.mp3"))
+    vserver = ctx.message.guild
+    voice_channel = server.voice_client
+    
+    voice_channel.play(discord.FFmpegPCMAudio("song.mp3"))
 
 @client.command()
 async def stats(ctx):

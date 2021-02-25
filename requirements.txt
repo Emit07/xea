@@ -3,3 +3,4 @@ requests
 spongebobcase
 youtube_dl
 PyNaCl
+ffmpeg-python

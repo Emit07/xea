@@ -186,29 +186,31 @@ class fun(Cog):
         embed.set_thumbnail(url=user_avatar)
         await ctx.send(embed=embed)
 
-    @commands.command()
+    @commands.command(aliases=['uwu', 'oWo', 'uWu'])
     async def owo(self, ctx, *, text=None):
-        if text is not None:
-            owo_text = owofy(text)
-            await ctx.send(owo_text)
-        else:
-            embed = discord.Embed(
-                title=":x: | You have to input text to owofy",
-                colour=0xe86823
-            )
-            await ctx.send(embed=embed)
+        async with ctx.typing():
+            if text is not None:
+                owo_text = owofy(text)
+                await ctx.send(owo_text)
+            else:
+                embed = discord.Embed(
+                    title=":x: | You have to input text to owofy",
+                    colour=0xe86823
+                )
+                await ctx.send(embed=embed)
 
     @commands.command()
     async def clap(self, ctx, *, text=None):
-        if text is not None:
-            clap_text = clap_emojifier(text)
-            await ctx.send(clap_text)
-        else:
-            embed = discord.Embed(
-                title=":x: | You have to input text to clapify",
-                colour=0xe86823
-            )
-            await ctx.send(embed=embed)
+        with ctx.typing():
+            if text is not None:
+                clap_text = clap_emojifier(text)
+                await ctx.send(clap_text)
+            else:
+                embed = discord.Embed(
+                    title=":x: | You have to input text to clapify",
+                    colour=0xe86823
+                )
+                await ctx.send(embed=embed)
 
     @commands.command(aliases=["reddit", "red"])
     async def r(self, ctx, sub=None, index=0):
