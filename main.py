@@ -17,19 +17,22 @@ async def on_ready():
     await client.change_presence(status=discord.Status.online, activity=activity)    
 
 @client.command()
-async def jazz(ctx):
-    if not ctx.author.voice:
-        await ctx.send(":x: You are not connected to a voice channel!")
-        return
+async def jazz(ctx, url=None):
+    if url is not None:
+        if not ctx.author.voice:
+            await ctx.send(":x: You are not connected to a voice channel!")
+            return
+        else:
+            channel = ctx.message.author.voice.channel
+
+        await channel.connect()
+
+        server = ctx.message.guild
+        voice_channel = server.voice_client
+        
+        player = await YTDLSource.from_url(url, loop=client.loop)
     else:
-        channel = ctx.message.author.voice.channel
-
-    await channel.connect()
-
-    server = ctx.message.guild
-    voice_channel = server.voice_client
-    
-    voice_channel.play(discord.FFmpegPCMAudio("song.mp3"))
+        await ctx.send(":x: Empty URL")
 
 @client.command()
 async def stats(ctx):
