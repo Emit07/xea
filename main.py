@@ -14,7 +14,7 @@ async def on_ready():
     activity = discord.Game(name=f"?help | {amount_servers} servers", type=3)
     await client.change_presence(status=discord.Status.online, activity=activity)    
 
-@commands.command()
+@client.command()
 async def jazz(self, ctx):
     voiceChannel = discord.utils.get(ctx.guild.voice_channels, name="General")
     voice = discord.utils.get(client.voice_clients, guild=ctx.guild)
