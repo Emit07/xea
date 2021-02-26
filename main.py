@@ -62,9 +62,6 @@ async def on_ready():
 
 @client.command(aliases=['p'])
 async def play(ctx, url=None):
-    discord.opus.load_opus()
-    if not discord.opus.is_loaded():
-        raise RunTimeError('Opus failed to load')
     if url is not None:
         if not ctx.author.voice:
             await ctx.send(":x: You are not connected to a voice channel!")
