@@ -1,7 +1,6 @@
 import discord
 from discord.ext import commands
 from discord.voice_client import VoiceClient
-
 import youtube_dl
 
 import os
@@ -10,6 +9,8 @@ from datetime import datetime
 client = commands.Bot(command_prefix="?")
 client.remove_command("help")
 
+
+youtube_dl.utils.bug_reports_message = lambda: ''
 
 ytdl_format_options = {
     'format': 'bestaudio/best',
@@ -72,8 +73,12 @@ async def play(ctx, url=None):
 
         server = ctx.message.guild
         voice_channel = server.voice_client
-        
-        player = await YTDLSource.from_url(url, loop=client.loop)
+
+        async with ctx.typing():
+            player = await YTDLSource.from_url(url, loop=client.loop)
+            voice_channel.play(player, after=lambda e: print('Player error: %s' % e) if e else None)
+
+        await ctx.send('**Now playing:** {}'.format(player.title))
     else:
         await ctx.send(":x: Empty URL")
 

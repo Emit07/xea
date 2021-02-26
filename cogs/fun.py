@@ -145,6 +145,7 @@ def clap_emojifier(text: Union[str, list, tuple, set], *, _print: bool = False):
 
     return clap_it(text) if not _print else print(clap_it(text))
 
+
 class fun(Cog):
     def __init__(self, bot):
         self.bot = bot
@@ -185,6 +186,13 @@ class fun(Cog):
         user_avatar = user.avatar_url
         embed.set_thumbnail(url=user_avatar)
         await ctx.send(embed=embed)
+
+    @commands.command()
+    async def echo(self, ctx, *, text=None):
+        if text is not None:
+            await ctx.send(text)
+        else:
+            await ctx.send("Echo what now?")
 
     @commands.command(aliases=['uwu', 'oWo', 'uWu'])
     async def owo(self, ctx, *, text=None):
