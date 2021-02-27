@@ -9,15 +9,6 @@ import datetime
 class info(Cog):
     def __init__(self, bot):
         self.bot = bot
-        self.starttime = str(datetime.datetime.now()).split('.')[0]
-
-    @commands.command()
-    async def uptime(self, ctx):
-        embed = discord.Embed(
-            title=f"SlimBot has been up since {self.starttime}",
-            colour=0xe86823
-        )
-        await ctx.send(embed=embed)
     
     @commands.command()
     async def userinfo(self, ctx, user1 : discord.Member=None):
@@ -42,7 +33,29 @@ class info(Cog):
         embed.add_field(name="Activity ", value=f"`{str(user1.activity.type).split('.')[-1].title() if user1.activity else 'N/A'} {user1.activity.name if user1.activity else ''}`", inline=False)
 
         await ctx.send(embed=embed)
+
+    @commands.command()
+    async def avatar(self, ctx, user : discord.Member=None):
+        if user is None:
+            user = ctx.author
+        embed = discord.Embed(
+            title=f"{user}\'s avatar",
+            colour=0xe86823
+        )
+        user_avatar = user.avatar_url
+        embed.set_thumbnail(url=user_avatar)
+        await ctx.send(embed=embed)
     
+    @commands.command()
+    async def stats(ctx):
+        embed = discord.Embed(
+            title="SlimBot Statistics",
+            colour=0xe86823
+        )
+        servers_amount = len(client.guilds)
+        embed.add_field(name="Servers: ", value=f"`{servers_amount} servers`")
+        await ctx.send(embed=embed)
+
     @commands.command()
     async def icon(self, ctx):
         embed = discord.Embed(
