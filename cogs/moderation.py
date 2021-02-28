@@ -2,17 +2,20 @@ import discord
 from discord import Embed
 from discord.ext import commands
 from discord.ext.commands import Cog
-
+import main
 import json
+
+client = commands.Bot(command_prefix="?")
 
 class moderation(Cog):
 
-    WARNS = {} ### {"USER": {"amount": *, "muted": false}}
-
     def __init__(self, bot):
         self.bot = bot
-        self.mod_roles = []
-    
+
+    @commands.command()
+    async def errors(self, ctx):
+        await ctx.send(main.SHOW_ERRORS)
+
     @commands.command()
     async def mute(self, ctx, user1 : discord.Member, *, reason=None):
         if ctx.author.guild_permissions.manage_messages:
@@ -73,6 +76,35 @@ class moderation(Cog):
                     colour=0xe86823
                 )
                 await ctx.send(embed=embed)
+
+    @commands.command()
+    async def kick(self, ctx, user1 : discord.Member=None, *, reason=None):
+        if ctx.author.guild_permissions.kick_members:
+            await user1.kick(reason=reason)
+            embed = discord.Embed(
+                title=f":white_check_mark: {user1} has been kicked",
+                description=f"reason: {reason}",
+                colour=0xe86823
+            )
+            await ctx.send(embed=embed)
+
+    @commands.command(aliases=["slow", "delay"])
+    async def slowmode(self, ctx, seconds: int):
+        if ctx.author.guild_permissions.manage_messages:
+            if seconds is not None:
+                if seconds <= 21600 and seconds >= 0:
+                    try:
+                        await ctx.channel.edit(slowmode_delay=seconds)
+                        if seconds == 1: s = ""
+                        else: s = "s"
+                        await ctx.send(f":white_check_mark: Set the slowmode delay to {seconds} second{s}")
+                    except Exception as e:
+                        await ctx.send(f":x: {e}")
+                else:
+                    if seconds > 21600: await ctx.send(":x: slowmode delay cannot be longer than 6 hours")
+                    if seconds < 0: await ctx.send(":x: slowmode delay must be a positive number")
+            else:
+                await ctx.send(":x: time was empty")
 
     @commands.command()
     async def warn(self, ctx, user1 : discord.Member=None, *, reason=None):

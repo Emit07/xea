@@ -45,20 +45,34 @@ Install the follwing libraries.
 
 Set your environment variable to the bot token
 
-## Features
+## DOCUMENTATION
 
-* [x] mute and unmute users on text channels
-* [x] clear text command
-* [x] command to turn input text into sPoNgEbOB case
-* [x] hug command that returns a gif of an anime hug to hug other user
-* [x] command that pulls posts from reddit with webscraping
-* [x] uptime command
-* [ ] streamline fun.py file (bloated with functions) 
-* [ ] Role on join
-* [ ] Self role (using reactions)
-* [ ] ban and kick commands
-* [ ] levels
-* [ ] statistics on messages sent
-* [ ] statistics for every user
-* [ ] integrated discordgames
-* [ ] other integrations (not sure which ones)  
+**NOTE the documentation is not complete**
+
+The default prefix for slimbot is `?`. Square brackets indicate that a parameter is needed and curly brackets indicate that the parameter is optional.
+
+### Moderation commands
+
+* `?mute [user] {reason}`
+This command disables the ability for a user to talk in a text channel. To use this command you need manage messages permission, you cannot mute an administrator.
+* `?unmute [user]`
+This will restore the ability for a user to send messages in text channels, just like the mute command you need the manage message permission to use this command.
+* `?warn [user] {reason}`
+The warn command does not have an inventory system of warns but is just a neatly formatted warn. Similar to the mute and unmute command you require the manage messages permission to use this command.
+* `?clear {amount}`
+The clear command will delete a specified amount of messages, if not specified a single message will be deleted. Like all the other moderation commands you require the manage messages permission to use this command.
+
+### Polls
+
+* `?poll [message]`
+This poll command will generate a poll that staticly has three options which are, yes, no, shrug.
+
+* `?pollx "[message]" "{option one}" "{option two}" "{option three}"`
+This poll command will make a more complex poll with poll options that are entered by the user. Pollx does require a manage messages role to prevent spam. I will add a config command that will allow moderators to allow and disable certain commands for people.
+
+## TODO
+
+* [ ] fix bot avatar not allowing help commands to show up
+* [ ] add a config command to allow and disable certain commands
+* [ ] add role on join command
+* [ ] add self role command

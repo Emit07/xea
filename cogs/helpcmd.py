@@ -8,6 +8,8 @@ import main
 client = commands.Bot(command_prefix="?")
 client.remove_command("help")
 
+# TODO fix bot url issue with help commands
+
 class helpcmd(Cog):
     def __init__(self, bot):
         self.bot = bot
@@ -37,6 +39,8 @@ class helpcmd(Cog):
         # embed.set_thumbnail(url=bot_url)
         embed.add_field(name="`?mute [user] [reason]`", value="mutes a user in text channels", inline=False)
         embed.add_field(name="`?unmute [user]`", value="unmutes a user in text channels", inline=False)
+        embed.add_field(name="`?kick [user] {reason}`", value="this will kick the specified user", inline=False)
+        embed.add_field(name="`?slowmode [seconds]`", value="will change the slowmode delay in specified channel, 0 is off", inline=False)
         embed.add_field(name="`?warn [user] [reason]`", value="warns user (still working on system)", inline=False)
         embed.add_field(name="`?clear [amount]`", value="deletes a specified amount of messages", inline=False)
         await ctx.send(embed=embed)

@@ -12,7 +12,6 @@ class polls(Cog):
 
     @commands.command()
     async def poll(self, ctx, *, question=None):
-
         emojis = ["👍", "👎", "🤷‍♂️"]
 
         for emoji in emojis:
@@ -20,22 +19,22 @@ class polls(Cog):
     
     @commands.command()
     async def pollx(self, ctx, question, *options):
-        embed_new = discord.Embed(
-            title=question,
-            colour=0xe86823
-        )
+        if ctx.author.guild_permissions.manage_messages:
+            embed_new = discord.Embed(
+                title=question,
+                colour=0xe86823
+            )
 
-        numbers = ["1️⃣", "2️⃣", "3️⃣", "4️⃣", "5️⃣", "6️⃣", "7️⃣", "8️⃣", "9️⃣", "🔟"]
+            numbers = ["1️⃣", "2️⃣", "3️⃣", "4️⃣", "5️⃣", "6️⃣", "7️⃣", "8️⃣", "9️⃣", "🔟"]
 
-        lines = ""
-        for index, option in enumerate(options):
-            lines += f"\n{numbers[index]} {option}"
-        
+            lines = ""
+            for index, option in enumerate(options):
+                lines += f"\n{numbers[index]} {option}"
 
-        embed_new.add_field(name="**Options**", value=lines)
-        message = await ctx.send(embed=embed_new)
-        for index, option in enumerate(options):
-            await message.add_reaction(numbers[index])
+            embed_new.add_field(name="**Options**", value=lines)
+            message = await ctx.send(embed=embed_new)
+            for index, option in enumerate(options):
+                await message.add_reaction(numbers[index])
 
 
 def setup(bot):
