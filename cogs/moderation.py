@@ -17,7 +17,24 @@ class moderation(Cog):
         await ctx.send(main.SHOW_ERRORS)
 
     @commands.command()
-    async def mute(self, ctx, user1 : discord.Member, *, reason=None):
+    async def add_mute(self, ctx):
+        if ctx.author.guild_permissions.manage_messages:
+            try:
+                muted_role = await guild.create_role(name="Muted")
+                for channel in guild.channels:
+                    print(channel)
+                    await channel.set_permissions(muted_role, send_messages=False)
+            except Exception as e:
+                await ctx.send(e)
+
+    @commands.command()
+    async def mute(
+        self,
+        ctx,
+        user1 : discord.Member=None,
+        *, 
+        reason=None
+    ):
         if ctx.author.guild_permissions.manage_messages:
             if not user1.guild_permissions.administrator:
                 guild = ctx.guild
@@ -78,7 +95,13 @@ class moderation(Cog):
                 await ctx.send(embed=embed)
 
     @commands.command()
-    async def kick(self, ctx, user1 : discord.Member=None, *, reason=None):
+    async def kick(
+        self,
+        ctx,
+        user1 : discord.Member=None,
+        *,
+        reason=None
+    ):
         if ctx.author.guild_permissions.kick_members:
             await user1.kick(reason=reason)
             embed = discord.Embed(
@@ -107,7 +130,13 @@ class moderation(Cog):
                 await ctx.send(":x: time was empty")
 
     @commands.command()
-    async def warn(self, ctx, user1 : discord.Member=None, *, reason=None):
+    async def warn(
+        self,
+        ctx,
+        user1 : discord.Member=None,
+        *,
+        reason=None
+    ):
         if ctx.author.guild_permissions.manage_messages:
             if not user1.guild_permissions.administrator:
                 embed = discord.Embed(
