@@ -14,7 +14,9 @@ class moderation(Cog):
 
     @commands.command()
     async def errors(self, ctx):
-        await ctx.send(main.SHOW_ERRORS)
+        if main.SHOW_ERRORS: main.SHOW_ERRORS = False
+        elif main.SHOW_ERRORS == False: main.SHOW_ERRORS = True
+        await ctx.send(f"show errors is now set to > {main.SHOW_ERRORS}")
 
     @commands.command()
     async def add_mute(self, ctx):
