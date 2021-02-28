@@ -44,7 +44,6 @@ class moderation(Cog):
                     muted_role = await guild.create_role(name="Muted")
 
                     for channel in guild.channels:
-                        print(channel)
                         await channel.set_permissions(muted_role, send_messages=False)
                 await user1.add_roles(muted_role)
 
@@ -75,7 +74,6 @@ class moderation(Cog):
                     muted_role = await guild.create_role(name="Muted")
 
                     for channel in guild.channels:
-                        print(channel)
                         await channel.set_permissions(muted_role, speak=False, send_messages=False)
                 await user1.remove_roles(muted_role)
 
