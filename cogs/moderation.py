@@ -25,7 +25,7 @@ class moderation(Cog):
                 muted_role = await guild.create_role(name="Muted")
                 for channel in guild.channels:
                     print(channel)
-                    await channel.set_permissions(muted_role, send_messages=False)
+                    await channel.set_permissions(muted_role, send_messages=False, add_reactions=False)
             except Exception as e:
                 await ctx.send(e)
 
@@ -46,7 +46,7 @@ class moderation(Cog):
                     muted_role = await guild.create_role(name="Muted")
 
                     for channel in guild.channels:
-                        await channel.set_permissions(muted_role, send_messages=False)
+                        await channel.set_permissions(muted_role, send_messages=False, add_reactions=False)
                 await user1.add_roles(muted_role)
 
                 embed = discord.Embed(
