@@ -22,6 +22,7 @@ class moderation(Cog):
     async def add_mute(self, ctx):
         if ctx.author.guild_permissions.manage_messages:
             try:
+                guild = ctx.guild
                 muted_role = await guild.create_role(name="Muted")
                 for channel in guild.channels:
                     print(channel)
