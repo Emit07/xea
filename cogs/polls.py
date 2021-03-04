@@ -40,11 +40,10 @@ class polls(Cog):
                 await message.add_reaction(numbers[index])
 
     @commands.command(aliases=['rpoll'])
-    async def pollr(self, ctx):
+    async def pollr(self, ctx, idx=1):
         URL = "https://www.reddit.com/r/polls.json"
         r = requests.get(URL, headers = {'User-agent': 'Chrome'})
         if str(r) == "<Response [200]>":
-            idx = 2
             post = r.json()["data"]["children"][idx]["data"]
 
             options = post["poll_data"]["options"]
@@ -59,7 +58,8 @@ class polls(Cog):
             lines = ""
             for index, option in enumerate(list(options)):
                 reddit_option = options[index]["text"]
-                lines += f"\n{numbers[index]} {reddit_option}"
+                if reddit_option.upper() != 'RESULTS':
+                    lines += f"\n{numbers[index]} {reddit_option}"
 
             embed.add_field(name="**Options**", value=lines)
             message = await ctx.send(embed=embed)
