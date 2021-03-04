@@ -41,30 +41,31 @@ class polls(Cog):
 
     @commands.command(aliases=['rpoll'])
     async def pollr(self, ctx, idx=1):
-        URL = "https://www.reddit.com/r/polls.json"
-        r = requests.get(URL, headers = {'User-agent': 'Chrome'})
-        if str(r) == "<Response [200]>":
-            post = r.json()["data"]["children"][idx]["data"]
+        if ctx.author.manage_messages:
+            URL = "https://www.reddit.com/r/polls.json"
+            r = requests.get(URL, headers = {'User-agent': 'Chrome'})
+            if str(r) == "<Response [200]>":
+                post = r.json()["data"]["children"][idx]["data"]
 
-            options = post["poll_data"]["options"]
+                options = post["poll_data"]["options"]
 
-            embed = discord.Embed(
-                title=post["title"],
-                colour=0xe86823
-            )
+                embed = discord.Embed(
+                    title=post["title"],
+                    colour=0xe86823
+                )
 
-            numbers = ["1️⃣", "2️⃣", "3️⃣", "4️⃣", "5️⃣", "6️⃣", "7️⃣", "8️⃣", "9️⃣", "🔟"]
+                numbers = ["1️⃣", "2️⃣", "3️⃣", "4️⃣", "5️⃣", "6️⃣", "7️⃣", "8️⃣", "9️⃣", "🔟"]
 
-            lines = ""
-            for index, option in enumerate(list(options)):
-                reddit_option = options[index]["text"]
-                if reddit_option.upper() != 'RESULTS':
-                    lines += f"\n{numbers[index]} {reddit_option}"
+                lines = ""
+                for index, option in enumerate(list(options)):
+                    reddit_option = options[index]["text"]
+                    if reddit_option.upper() != 'RESULTS':
+                        lines += f"\n{numbers[index]} {reddit_option}"
 
-            embed.add_field(name="**Options**", value=lines)
-            message = await ctx.send(embed=embed)
-            for index, option in enumerate(options):
-                await message.add_reaction(numbers[index])
+                embed.add_field(name="**Options**", value=lines)
+                message = await ctx.send(embed=embed)
+                for index, option in enumerate(options):
+                    await message.add_reaction(numbers[index])
 
 def setup(bot):
     bot.add_cog(polls(bot))
