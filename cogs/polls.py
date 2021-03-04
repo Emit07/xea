@@ -41,7 +41,7 @@ class polls(Cog):
 
     @commands.command(aliases=['rpoll'])
     async def pollr(self, ctx, idx=1):
-        if ctx.author.manage_messages:
+        if ctx.author.guild_permissions.manage_messages:
             URL = "https://www.reddit.com/r/polls.json"
             r = requests.get(URL, headers = {'User-agent': 'Chrome'})
             if str(r) == "<Response [200]>":
