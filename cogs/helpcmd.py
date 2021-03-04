@@ -69,7 +69,8 @@ class helpcmd(Cog):
         # bot_url=client.user.avatar_url
         # embed.set_thumbnail(url=bot_url)
         embed.add_field(name="`?poll [question]`", value="will make a yes, no, \'shrug\' poll", inline=False)
-        embed.add_field(name="`?pollx \"[question in quotes]\" \"Option one\" \"Option two\" \"Option three\"`", value="gives you server icon", inline=False)
+        embed.add_field(name="`?pollx \"[question in quotes]\" \"Option one\" \"Option two\" \"Option three\"`", value="creates a poll with custom options, requires manage messages permissions", inline=False)
+        embed.add_field(name="`?pollr {Index}", value="sends a poll from https://reddit.com/r/polls", inline=False)
         await ctx.send(embed=embed)
 
     @help.command()
