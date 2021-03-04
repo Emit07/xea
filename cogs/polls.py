@@ -75,7 +75,8 @@ class polls(Cog):
 
             lines = ""
             for index, option in enumerate(list(options)):
-                lines += f"\n{numbers[index]} {options[index]["text"]}"
+                reddit_option = options[index]["text"]
+                lines += f"\n{numbers[index]} {reddit_option}"
 
             embed_new.add_field(name="**Options**", value=lines)
             message = await ctx.send(embed=embed_new)
