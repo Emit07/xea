@@ -6,6 +6,9 @@ from discord.ext.commands import Cog
 from datetime import datetime
 import datetime
 
+import json 
+import requests
+
 def pull_sub(sub=None, index=0):
     if sub is None:
         sub="all"
