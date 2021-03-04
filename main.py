@@ -31,11 +31,11 @@ async def on_message(message):
 
     await client.process_commands(message)
 
-# client.load_extension("cogs.helpcmd")
-# client.load_extension("cogs.moderation")
+client.load_extension("cogs.helpcmd")
+client.load_extension("cogs.moderation")
 client.load_extension("cogs.polls")
-# client.load_extension("cogs.info")
-# client.load_extension("cogs.fun")
+client.load_extension("cogs.info")
+client.load_extension("cogs.fun")
 
 TOKEN = os.environ['TOKEN']
 client.run(TOKEN)
