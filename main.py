@@ -6,8 +6,6 @@ from datetime import datetime
 client = commands.Bot(command_prefix="?")
 client.remove_command("help")
 
-SHOW_ERRORS = True
-
 @client.event
 async def on_ready():
     print(f'XEA has launched at {datetime.now()}')
@@ -17,10 +15,21 @@ async def on_ready():
 
 @client.event
 async def on_command_error(ctx, error):
-    global SHOW_ERRORS
-    
-    if SHOW_ERRORS:
-        await ctx.send(error)
+    print(error)
+
+@client.event
+async def on_message(message):
+
+    mention = f'<@!{client.user.id}>'
+    if mention in message.content:
+        embed = discord.Embed(
+            title="You Mentioned Me!",
+            description="my prefix is `?`. Need more help? you can do `?help` and continue from there. Wanna see my code? Check it out here https://github.com/emit07/xea",
+            colour=0xe86823
+        )
+        await message.channel.send(embed=embed)
+
+    await client.process_commands(message)
 
 client.load_extension("cogs.helpcmd")
 client.load_extension("cogs.moderation")
