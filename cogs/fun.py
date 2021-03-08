@@ -8,6 +8,8 @@ from spongebobcase import tospongebob
 import json
 import requests
 
+
+# TODO make this function more "pythonic", less ugly looking
 def pull_sub(sub=None, index=0):
     if sub is None:
         sub="all"
@@ -34,6 +36,16 @@ class fun(Cog):
 
     @commands.command()
     async def hug(self, ctx, user1 : discord.Member=None):
+
+        """
+
+        This command returns an embed with
+        an anime gif of people hugging from an api.
+
+        TODO redundant embed creation, removes
+
+        """
+
         if user1 is not None:
             r = requests.get("https://some-random-api.ml/animu/hug")
             r_json = r.json()
@@ -55,17 +67,35 @@ class fun(Cog):
     
     @commands.command()
     async def spongebob(self, ctx, *, text=None):
+
+        """
+        This command returns text in sPoNgEboB cAseE
+        """
+
         await ctx.send(tospongebob(text))
 
     @commands.command()
     async def echo(self, ctx, *, text=None):
-        if text is not None:
-            await ctx.send(text)
-        else:
-            await ctx.send("Echo what now?")
+
+        """
+        This command echos text that the user inputs
+
+        TODO think of removing this command
+
+        """
+
+        if text is not None: await ctx.send(text)
 
     @commands.command(aliases=['uwu', 'oWo', 'uWu'])
     async def owo(self, ctx, *, text=None):
+
+        """
+        This command returns owofied text (not my idea)
+
+        TODO make the code look butter and less cluttered
+
+        """
+
         if text is not None:
 
             textstr = text
@@ -97,6 +127,12 @@ class fun(Cog):
 
     @commands.command()
     async def clap(self, ctx, *, text=None):
+        
+        """
+        This command returns inputted user text 
+        with hands where the spaces where.
+        """
+
         if text is not None:
             clap_text = " 👏 ".join([*text.split(" ")])
             await ctx.send(clap_text)
@@ -109,6 +145,18 @@ class fun(Cog):
 
     @commands.command(aliases=["reddit", "red"])
     async def r(self, ctx, sub=None, index=0):
+
+        """
+        This command returns a post from reddit
+        some subreddits are banned
+
+        WARNING - this code is REALLY ugly
+
+        TODO expand banned subreddits list
+        TODO this code is ugly, fix it
+
+        """
+
         if sub not in ["5050", "fiftyfifty", "gore"]:
             reddit_data = pull_sub(sub, index)
             if reddit_data["error"] is None:

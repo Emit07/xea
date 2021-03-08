@@ -2,9 +2,9 @@
 
 **NOTE TO SELF DO NOT I REPEAT DO NOT PUSH BOT TOKEN**
 
-## Version 0.1.1 beta
+## Version 0.2.2 beta
 
-This is SlimBot (or xea) an open source discord bot that is lightweight in nature and easy to modify. Further documentation will be provided later on. Please feel free to make a pull request and improve SlimBot.
+This is SlimBot (or xea) an open source discord bot that is lightweight in nature and easy to modify. Further documentation will be provided later on. Slimbot is now in the documentation proccess. Please feel free to make a pull request and improve SlimBot.
 
 **You can add SlimBot to your own server with [this](https://bit.ly/3jQsMBN "Add SlimBot") link.**
 

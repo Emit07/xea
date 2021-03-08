@@ -8,20 +8,27 @@ client.remove_command("help")
 
 @client.event
 async def on_ready():
+    # Output to the console
     print(f'XEA has launched at {datetime.now()}')
+    
+    # this sets the bots status to the amount of servers it is in
     amount_servers = len(client.guilds)
     activity = discord.Game(name=f"?help | {amount_servers} servers", type=3)
     await client.change_presence(status=discord.Status.online, activity=activity)
 
-# @client.event
-# async def on_command_error(ctx, error):
-#     print(error)
+@client.event
+async def on_command_error(ctx, error):
+    # prints simpler errors without cluttering console,
+    # also handles errors so bot doesnt freak
+    print(error)
 
 @client.event
 async def on_message(message):
 
+    # detects if a user mentions the bot
     mention = f'<@!{client.user.id}>'
-    if mention in message.content:
+    if mention == message.content:
+        # sends information
         embed = discord.Embed(
             title="You Mentioned Me!",
             description="my prefix is `?`. Need more help? you can do `?help` and continue from there. Wanna see my code? Check it out here https://github.com/emit07/xea",

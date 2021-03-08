@@ -1,5 +1,3 @@
 discord
 requests
 spongebobcase
-youtube_dl
-PyNaCl

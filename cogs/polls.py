@@ -15,13 +15,31 @@ class polls(Cog):
 
     @commands.command()
     async def poll(self, ctx, *, question=None):
+
+        """
+        This command adds some simple reactions to
+        the message for a simple poll.
+        """
+
         emojis = ["👍", "👎", "🤷‍♂️"]
 
+        # this adds reactions to the original message
         for emoji in emojis:
             await ctx.message.add_reaction(emoji)
     
     @commands.command()
     async def pollx(self, ctx, question, *options):
+        
+        """
+        This command returns a more complex poll 
+        with different specified options.
+        The author needs manage messages
+        permissions to send this poll,
+        this will prevent spam.
+        """
+
+        # checks if author has manage messages permissions
+        # to prevent spam
         if ctx.author.guild_permissions.manage_messages:
             embed_new = discord.Embed(
                 title=question,
@@ -30,17 +48,27 @@ class polls(Cog):
 
             numbers = ["1️⃣", "2️⃣", "3️⃣", "4️⃣", "5️⃣", "6️⃣", "7️⃣", "8️⃣", "9️⃣", "🔟"]
 
+            # this function formats a single string
+            # into multiple lines for the embed
             lines = ""
             for index, option in enumerate(options):
                 lines += f"\n{numbers[index]} {option}"
 
+            # formats embed and sends it
             embed_new.add_field(name="**Options**", value=lines)
             message = await ctx.send(embed=embed_new)
+
+            # adds reactions to message
             for index, option in enumerate(options):
                 await message.add_reaction(numbers[index])
 
     @commands.command(aliases=['rpoll'])
     async def pollr(self, ctx, idx=1):
+
+        """
+        Takes a poll from r/polls
+        """
+
         if ctx.author.guild_permissions.manage_messages:
             URL = "https://www.reddit.com/r/polls.json"
             r = requests.get(URL, headers = {'User-agent': 'Chrome'})
