@@ -2,7 +2,7 @@
 
 **NOTE TO SELF DO NOT I REPEAT DO NOT PUSH BOT TOKEN**
 
-## Version 0.2.2 beta
+## Version 0.2.0 beta
 
 This is SlimBot (or xea) an open source discord bot that is lightweight in nature and easy to modify. Further documentation will be provided later on. Slimbot is now in the documentation proccess. Please feel free to make a pull request and improve SlimBot.
 
@@ -76,3 +76,7 @@ This poll command will make a more complex poll with poll options that are enter
 * [ ] add a config command to allow and disable certain commands
 * [ ] add role on join command
 * [ ] add self role command
+
+## Update log
+
+3/8/2021 - Version 0.2.0 beta has been released! Code has been documented.

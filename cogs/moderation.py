@@ -1,3 +1,11 @@
+
+"""
+This file is to do with all the moderation commands.
+
+TODO check some permissions
+TODO manage messages can mute themselfs
+"""
+
 import discord
 from discord import Embed
 from discord.ext import commands
@@ -13,19 +21,26 @@ class moderation(Cog):
         self.bot = bot
 
     @commands.command()
-    async def errors(self, ctx):
-        if main.SHOW_ERRORS: main.SHOW_ERRORS = False
-        elif main.SHOW_ERRORS == False: main.SHOW_ERRORS = True
-        await ctx.send(f"show errors is now set to > {main.SHOW_ERRORS}")
-
-    @commands.command()
     async def add_mute(self, ctx):
+
+        """
+        This command adds the muted role permissions
+        to every text channel.
+        """
+
         if ctx.author.guild_permissions.manage_messages:
-            try:
-                guild = ctx.guild
+            # gets muted role
+            guild = ctx.guild
+            muted_role = discord.utils.get(guild.roles, name="Muted")
+            
+            # if muted_role doesnt exist, make one
+            if not muted_role:
                 muted_role = await guild.create_role(name="Muted")
+
+            try:
+                # goes through every channel and changes permissions for muted role
+                guild = ctx.guild
                 for channel in guild.channels:
-                    print(channel)
                     await channel.set_permissions(muted_role, send_messages=False, add_reactions=False)
             except Exception as e:
                 await ctx.send(e)
@@ -34,20 +49,30 @@ class moderation(Cog):
     async def mute(
         self,
         ctx,
-        user1 : discord.Member=None,
+        user1 : discord.Member = None,
         *, 
         reason=None
     ):
+
+        # this command mutes the specified user
+
+        # checks if author has manage messages perm
         if ctx.author.guild_permissions.manage_messages:
+            # checks if victim is not an administrator
             if not user1.guild_permissions.administrator:
+                # gets role
                 guild = ctx.guild
                 muted_role = discord.utils.get(guild.roles, name="Muted")
 
+                # creates muted role and adds it to every channel
                 if not muted_role:
                     muted_role = await guild.create_role(name="Muted")
 
+                    # loops over channels and adds permissions
                     for channel in guild.channels:
                         await channel.set_permissions(muted_role, send_messages=False, add_reactions=False)
+                
+                # adds muted role to specified user
                 await user1.add_roles(muted_role)
 
                 embed = discord.Embed(
@@ -55,6 +80,8 @@ class moderation(Cog):
                     description=f"**Reason:** {reason}",
                     colour=0xe86823
                 )
+
+                # sets thumbnail to the users avatar
                 user_url = user1.avatar_url
                 embed.set_thumbnail(url=user_url)
 
