@@ -43,7 +43,7 @@ class info(Cog):
             colour=0xe86823
         )
         user_avatar = user.avatar_url
-        embed.set_thumbnail(url=user_avatar)
+        embed.set_image(url=user_avatar)
         await ctx.send(embed=embed)
     
     @commands.command()
