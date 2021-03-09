@@ -162,9 +162,10 @@ class moderation(Cog):
             if seconds is not None:
                 # checks to see if input was "off"
                 # if so turn slowmode off
-                if seconds.upper() == "OFF":
-                    await ctx.channel.edit(slowmode_delay=0)
-                    await ctx.send(":white_check_mark: turned slowmode off")
+                if isinstance(seconds, str):
+                    if seconds.upper() == "OFF":
+                        await ctx.channel.edit(slowmode_delay=0)
+                        await ctx.send(":white_check_mark: turned slowmode off")
                 # checks if seconds are within range
                 if seconds <= 21600 and seconds >= 0:
                     try:
