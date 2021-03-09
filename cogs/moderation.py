@@ -154,9 +154,12 @@ class moderation(Cog):
             await ctx.send(embed=embed)
 
     @commands.command(aliases=["slow", "delay"])
-    async def slowmode(self, ctx, seconds: int):
+    async def slowmode(self, ctx, seconds):
 
         # this command sets the slowmode delay of a channel
+
+        if isinstance(seconds, int):
+            seconds = int(seconds)
 
         if ctx.author.guild_permissions.manage_messages:
             if seconds is not None:
