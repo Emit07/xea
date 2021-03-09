@@ -124,7 +124,7 @@ class moderation(Cog):
 
                 await ctx.send(embed=embed)
             else:
-                # error
+                # shows error
                 embed = discord.Embed(
                     title=":x: you cannot unmute an administrator",
                     colour=0xe86823
@@ -139,8 +139,13 @@ class moderation(Cog):
         *,
         reason=None
     ):
+
+        # This command will kick a user
+
+        # checks for permissions
         if ctx.author.guild_permissions.kick_members:
             await user1.kick(reason=reason)
+            # creates embed
             embed = discord.Embed(
                 title=f":white_check_mark: {user1} has been kicked",
                 description=f"reason: {reason}",
@@ -150,10 +155,20 @@ class moderation(Cog):
 
     @commands.command(aliases=["slow", "delay"])
     async def slowmode(self, ctx, seconds: int):
+
+        # this command sets the slowmode delay of a channel
+
         if ctx.author.guild_permissions.manage_messages:
             if seconds is not None:
+                # checks to see if input was "off"
+                # if so turn slowmode off
+                if seconds.upper() == "OFF":
+                    await ctx.channel.edit(slowmode_delay=0)
+                    await ctx.send(":white_check_mark: turned slowmode off")
+                # checks if seconds are within range
                 if seconds <= 21600 and seconds >= 0:
                     try:
+                        # sets the slowmode
                         await ctx.channel.edit(slowmode_delay=seconds)
                         if seconds == 1: s = ""
                         else: s = "s"
@@ -174,8 +189,14 @@ class moderation(Cog):
         *,
         reason=None
     ):
+        
+        # warn command has no real use
+        # fancy "be quiet" command
+
+        # checks for permissions
         if ctx.author.guild_permissions.manage_messages:
             if not user1.guild_permissions.administrator:
+                # creates embed
                 embed = discord.Embed(
                     title=f"{user1} has been Warned",
                     description=f"reason: {reason}",
@@ -197,17 +218,22 @@ class moderation(Cog):
 
     @commands.command()
     async def clear(self, ctx, amount=1, args=None):
+        
+        # this command delets messages
+        
         if ctx.author.guild_permissions.manage_messages:
             if amount > 0:
                 try:
+                    # clears messages
                     await ctx.channel.purge(limit=amount+1)
+                    # if there are no arguments to hide the success message then send them
                     if args not in ["-n", "-h"]:
                         if amount > 1:
                             await ctx.send(f":white_check_mark: | successfully cleared {amount} messages")
                         else:
                             await ctx.send(f":white_check_mark: | successfully cleared {amount} message")
                 except:
-                    if args in ["-n", "-h"]:
+                    if args not in ["-n", "-h"]:
                         await ctx.send(f":x: | Error! could not clear messages")
 
 

@@ -63,7 +63,7 @@ class helpcmd(Cog):
         embed.add_field(name="`?kick [user] {reason}`", value="this will kick the specified user", inline=False)
         embed.add_field(name="`?slowmode [seconds]`", value="will change the slowmode delay in specified channel, 0 is off", inline=False)
         embed.add_field(name="`?warn [user] [reason]`", value="warns user (still working on system)", inline=False)
-        embed.add_field(name="`?clear [amount]`", value="deletes a specified amount of messages", inline=False)
+        embed.add_field(name="`?clear [amount] {arguments}`", value="deletes a specified amount of messages. Adding -n or -h will hide success message.", inline=False)
         await ctx.send(embed=embed)
 
     @help.command()
