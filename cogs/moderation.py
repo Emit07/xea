@@ -87,6 +87,7 @@ class moderation(Cog):
 
                 await ctx.send(embed=embed)
             else:
+                # shows error
                 embed = discord.Embed(
                     title=":x: you cannot mute an administrator",
                     colour=0xe86823
@@ -95,11 +96,17 @@ class moderation(Cog):
 
     @commands.command()
     async def unmute(self, ctx, user1 : discord.Member):
+
+        # this command does the opposite of the mute command, ie it removes the muted role
+
+        # checks for permissions
         if ctx.author.guild_permissions.manage_messages:
             if not user1.guild_permissions.administrator:
                 guild = ctx.guild
+                # gets role
                 muted_role = discord.utils.get(guild.roles, name="Muted")
 
+                # checks if exists
                 if not muted_role:
                     muted_role = await guild.create_role(name="Muted")
 
@@ -107,6 +114,7 @@ class moderation(Cog):
                         await channel.set_permissions(muted_role, speak=False, send_messages=False)
                 await user1.remove_roles(muted_role)
 
+                # sets the embed
                 embed = discord.Embed(
                     title=f"{user1} has been unmuted!",
                     colour=0xe86823
@@ -116,6 +124,7 @@ class moderation(Cog):
 
                 await ctx.send(embed=embed)
             else:
+                # error
                 embed = discord.Embed(
                     title=":x: you cannot unmute an administrator",
                     colour=0xe86823
